@@ -15,7 +15,7 @@ public class UserService {
 
     private final Faker faker;
 
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     @Autowired
     public UserService(Faker faker) {
@@ -47,4 +47,17 @@ public class UserService {
         return Optional.of(user);
     }
 
+    public Optional<User> update(String username, User user) {
+
+        Optional<User> userToBeUpdated = this.getByUsername(username);
+
+        if (!userToBeUpdated.isPresent()) {
+            return Optional.empty();
+        }
+
+        userToBeUpdated.get().setNickName(user.getNickName());
+        userToBeUpdated.get().setPassword(user.getPassword());
+
+        return userToBeUpdated;
+    }
 }
