@@ -37,4 +37,14 @@ public class UserService {
         return users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
     }
 
+    public Optional<User> create(User user) {
+        if (users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
+            return Optional.empty();
+        }
+
+        users.add(user);
+
+        return Optional.of(user);
+    }
+
 }
