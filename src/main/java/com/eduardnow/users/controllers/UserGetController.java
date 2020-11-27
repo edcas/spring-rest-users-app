@@ -24,12 +24,12 @@ public class UserGetController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> handler() {
+    public ResponseEntity<List<User>> handlerAll() {
         return new ResponseEntity<>(userService.all(), HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> handler(@PathVariable String username) {
+    public ResponseEntity<User> handlerByUsername(@PathVariable String username) {
         return userService.getByUsername(username)
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
