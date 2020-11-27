@@ -30,8 +30,12 @@ public class UserService {
         }
     }
 
-    public List<User> all() {
-        return users;
+    public List<User> all(String startWith) {
+        if (startWith == null) {
+            return users;
+        }
+
+        return users.stream().filter(user -> user.getUsername().startsWith(startWith)).collect(Collectors.toList());
     }
 
     public Optional<User> getByUsername(String username) {
