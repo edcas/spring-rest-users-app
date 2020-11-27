@@ -9,13 +9,14 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     private final Faker faker;
 
-    private final List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @Autowired
     public UserService(Faker faker) {
@@ -59,5 +60,9 @@ public class UserService {
         userToBeUpdated.get().setPassword(user.getPassword());
 
         return userToBeUpdated;
+    }
+
+    public void delete(String username) {
+        users = users.stream().filter(user -> !username.equals(user.getUsername())).collect(Collectors.toList());
     }
 }
