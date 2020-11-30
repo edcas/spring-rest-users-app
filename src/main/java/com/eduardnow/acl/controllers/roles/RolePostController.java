@@ -22,7 +22,7 @@ public class RolePostController {
     }
 
     @PostMapping
-    public ResponseEntity<Role> save(@RequestBody Role role) {
+    public ResponseEntity<Role> handler(@RequestBody Role role) {
         return new ResponseEntity<>(service.save(role), HttpStatus.CREATED);
     }
 
