@@ -1,4 +1,4 @@
-package com.eduardnow.users.models;
+package com.eduardnow.acl.models;
 
 public class User {
 

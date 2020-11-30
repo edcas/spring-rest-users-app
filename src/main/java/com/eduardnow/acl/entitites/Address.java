@@ -1,24 +1,26 @@
-package com.eduardnow.users.entitites;
+package com.eduardnow.acl.entitites;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "addresses")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    private String username;
+    private String street;
 
     @Column
-    private String password;
+    private String number;
 
-    @OneToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @Column
+    private String city;
+
+    @ManyToOne
     private Profile profile;
 
     public Integer getId() {
@@ -29,20 +31,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getStreet() {
+        return street;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Profile getProfile() {
@@ -57,13 +67,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        Address address = (Address) o;
+        return Objects.equals(id, address.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }

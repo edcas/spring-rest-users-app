@@ -1,4 +1,4 @@
-package com.eduardnow.users.entitites;
+package com.eduardnow.acl.entitites;
 
 import javax.persistence.*;
 import java.util.Objects;

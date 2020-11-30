@@ -1,4 +1,4 @@
-package com.eduardnow.users.config;
+package com.eduardnow.acl.config;
 
 import com.github.javafaker.Faker;
 import org.springframework.context.annotation.Bean;

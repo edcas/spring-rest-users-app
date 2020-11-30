@@ -1,7 +1,7 @@
-package com.eduardnow.users.controllers;
+package com.eduardnow.acl.controllers.users;
 
-import com.eduardnow.users.models.User;
-import com.eduardnow.users.services.UserService;
+import com.eduardnow.acl.models.User;
+import com.eduardnow.acl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

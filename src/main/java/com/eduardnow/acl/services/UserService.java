@@ -1,6 +1,6 @@
-package com.eduardnow.users.services;
+package com.eduardnow.acl.services;
 
-import com.eduardnow.users.models.User;
+import com.eduardnow.acl.models.User;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
