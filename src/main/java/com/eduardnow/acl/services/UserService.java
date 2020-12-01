@@ -24,6 +24,10 @@ public class UserService {
         return repository.findAll(PageRequest.of(page, size));
     }
 
+    public Page<String> allByUsernames(int page, int size) {
+        return repository.findAllUsernames(PageRequest.of(page, size));
+    }
+
     public Optional<User> getByUsername(String username) {
         return repository.findByUsername(username);
     }

@@ -25,6 +25,12 @@ public class UserGetController {
         return new ResponseEntity<>(userService.all(page, size), HttpStatus.OK);
     }
 
+    @GetMapping("/usernames")
+    public ResponseEntity<Page<String>> handlerAllByUsernames(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                              @RequestParam(value = "size", required = false, defaultValue = "8") int size) {
+        return new ResponseEntity<>(userService.allByUsernames(page, size), HttpStatus.OK);
+    }
+
     @GetMapping("/{username}")
     public ResponseEntity<User> handlerByUsername(@PathVariable("username") String username) {
         return userService.getByUsername(username)
