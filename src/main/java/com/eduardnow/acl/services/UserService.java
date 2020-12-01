@@ -3,11 +3,12 @@ package com.eduardnow.acl.services;
 import com.eduardnow.acl.entitites.User;
 import com.eduardnow.acl.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -19,16 +20,12 @@ public class UserService {
         this.repository = repository;
     }
 
-    public List<User> all(String startWith) {
-        if (startWith == null) {
-            return repository.findAll();
-        }
-
-        return repository.findAll();
+    public Page<User> all(int page, int size) {
+        return repository.findAll(PageRequest.of(page, size));
     }
 
     public Optional<User> getByUsername(String username) {
-        return null;
+        return repository.findByUsername(username);
     }
 
     public Optional<User> create(User user) {
