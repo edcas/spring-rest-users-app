@@ -1,12 +1,10 @@
 package com.eduardnow.acl.services;
 
-import com.eduardnow.acl.models.User;
-import com.github.javafaker.Faker;
+import com.eduardnow.acl.entitites.User;
+import com.eduardnow.acl.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,59 +12,34 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    private final Faker faker;
-
-    private List<User> users = new ArrayList<>();
+    private final UserRepository repository;
 
     @Autowired
-    public UserService(Faker faker) {
-        this.faker = faker;
-    }
-
-    @PostConstruct
-    public void init() {
-        for (int i = 0; i < 100; i++) {
-            users.add(new User(faker.funnyName().name(), faker.name().username(), faker.dragonBall().character()));
-        }
+    public UserService(UserRepository repository) {
+        this.repository = repository;
     }
 
     public List<User> all(String startWith) {
         if (startWith == null) {
-            return users;
+            return repository.findAll();
         }
 
-        return users.stream().filter(user -> user.getUsername().startsWith(startWith)).collect(Collectors.toList());
+        return repository.findAll();
     }
 
     public Optional<User> getByUsername(String username) {
-        return users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
+        return null;
     }
 
     public Optional<User> create(User user) {
-        if (users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
-            return Optional.empty();
-        }
-
-        users.add(user);
-
-        return Optional.of(user);
+        return null;
     }
 
     public Optional<User> update(String username, User user) {
-
-        Optional<User> userToBeUpdated = this.getByUsername(username);
-
-        if (!userToBeUpdated.isPresent()) {
-            return Optional.empty();
-        }
-
-        userToBeUpdated.get().setNickName(user.getNickName());
-        userToBeUpdated.get().setPassword(user.getPassword());
-
-        return userToBeUpdated;
+        return null;
     }
 
     public void delete(String username) {
-        users = users.stream().filter(user -> !username.equals(user.getUsername())).collect(Collectors.toList());
+
     }
 }

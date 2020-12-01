@@ -21,6 +21,13 @@ public class User {
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
+    public User(Integer id) {
+        this.id = id;
+    }
+
+    public User() {
+    }
+
     public User(String username, String password, Profile profile) {
         this.username = username;
         this.password = password;
