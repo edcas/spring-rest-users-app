@@ -2,6 +2,9 @@ package com.eduardnow.acl.controllers.users;
 
 import com.eduardnow.acl.entitites.User;
 import com.eduardnow.acl.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -32,6 +35,11 @@ public class UserGetController {
     }
 
     @GetMapping("/{username}")
+    @ApiOperation(value = "Returns a user for a given username", response = User.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The record was found"),
+            @ApiResponse(code = 404, message = "The record was not found")
+    })
     public ResponseEntity<User> handlerByUsername(@PathVariable("username") String username) {
         return userService.getByUsername(username)
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
