@@ -2,6 +2,7 @@ package com.eduardnow.acl.controllers.users;
 
 import com.eduardnow.acl.entitites.User;
 import com.eduardnow.acl.services.UserService;
+import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -23,6 +24,7 @@ public class UserGetController {
     }
 
     @GetMapping
+    @Timed("get.users")
     public ResponseEntity<Page<User>> handlerAll(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                  @RequestParam(value = "size", required = false, defaultValue = "8") int size) {
         return new ResponseEntity<>(userService.all(page, size), HttpStatus.OK);
