@@ -3,6 +3,7 @@ package com.eduardnow.acl.services;
 import com.eduardnow.acl.entitites.User;
 import com.eduardnow.acl.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class UserService {
         this.repository = repository;
     }
 
+    @Cacheable(value = "users", unless = "#result == null")
     public Page<User> all(int page, int size) {
         return repository.findAll(PageRequest.of(page, size));
     }
@@ -28,6 +30,7 @@ public class UserService {
         return repository.findAllUsernames(PageRequest.of(page, size));
     }
 
+    @Cacheable(value = "usernames", key = "#username", unless = "#result == null")
     public Optional<User> getByUsername(String username) {
         return repository.findByUsername(username);
     }
